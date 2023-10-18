@@ -1,0 +1,13 @@
+{
+  "name": "logger",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@sentry/react": "^7.74.1",
+    "axios": "^1.5.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
