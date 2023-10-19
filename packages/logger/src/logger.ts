@@ -9,8 +9,11 @@ export class Logger {
   private logClient: AxiosInstance;
 
   contructor(config: LoggerOptions) {
-    this.defaultOption.sellerId = config.sellerId;
-    this.defaultOption.deviceId = config.deviceId;
+    this.init(config);
+  }
+
+  init(config: LoggerOptions) {
+    this.defaultOption = config;
 
     this.initSentry(config.sentry);
     this.initLoki(config.loki);
