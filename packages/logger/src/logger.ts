@@ -68,12 +68,6 @@ export class Logger {
   }
 
   error(event: EventType) {
-    const { data: error } = event;
-
-    // TODO: CustomError 정의
-    // if (error instanceof CustomError) {
-    // }
-
     this.log({
       ...event,
       level: "error",
