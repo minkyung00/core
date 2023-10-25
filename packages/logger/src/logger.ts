@@ -3,6 +3,7 @@ import axios, { AxiosInstance } from "axios";
 
 import { LoggerOptions } from "./types/config";
 import type { Event as EventType } from "../src/types/event";
+import { loggingServiceOption } from "./types/loggingService";
 
 export class Logger {
   private defaultOption: LoggerOptions;
@@ -67,10 +68,21 @@ export class Logger {
     });
   }
 
-  error(event: EventType) {
-    this.log({
-      ...event,
-      level: "error",
-    });
+  error(
+    event: EventType,
+    loggingService: loggingServiceOption = { sentry: true, loki: true }
+  ) {
+    const { sentry, loki } = loggingService;
+
+    if (sentry && loki) {
+      this.log({
+        ...event,
+        level: "error",
+      });
+    } else if (sentry) {
+      this.sendSentry(event);
+    } else {
+      this.sendLoki(event);
+    }
   }
 }
